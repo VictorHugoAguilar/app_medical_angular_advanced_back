@@ -1,6 +1,6 @@
 const { response } = require('express');
 const bcrypt = require('bcrypt');
-const Usuario = require('../models/usuario');
+const Usuario = require('../models/usuario.model');
 
 const getUsers = async(req, res) => {
     const usuarios = await Usuario.find({}, 'nombre email role google');

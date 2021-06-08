@@ -18,7 +18,7 @@ app.use(express.json());
 dbConnection();
 
 // Rutas
-app.use('/api/usuarios', require('./routes/usuarios'))
+app.use('/api/usuarios', require('./routes/usuarios.routes'))
 
 
 app.listen(process.env.PORT, () => {
