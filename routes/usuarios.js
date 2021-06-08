@@ -1,17 +1,16 @@
 const { Router } = require('express');
+const { getUsuarios, addUsuarios } = require('../controllers/usuarios');
+
 
 const router = Router();
 
+/**
+ * RUTA: /api/usuarios
+ */
 
-router.get('/', (req, res) => {
-    res.json({
-        ok: true,
-        mgs: 'Todo Ok (^.^) ',
-        usuario: [{
-            id: 123,
-            nombre: 'victor'
-        }]
-    })
-})
+
+router.get('/', getUsuarios)
+router.post('/', addUsuarios)
+
 
 module.exports = router;
