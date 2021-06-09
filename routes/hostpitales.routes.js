@@ -11,8 +11,16 @@ const router = Router();
  * Rutas: /api/hospitales
  */
 router.get('/', [], getHospitales);
-router.post('/', [], addHospital);
-router.put('/:id', [], updateHospital);
-router.delete('/:id', [], deleteHospital)
+router.post('/', [
+    validarJWT,
+    check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+    validarCampos
+], addHospital);
+router.put('/:id', [
+    validarJWT
+], updateHospital);
+router.delete('/:id', [
+    validarJWT
+], deleteHospital)
 
 module.exports = router;

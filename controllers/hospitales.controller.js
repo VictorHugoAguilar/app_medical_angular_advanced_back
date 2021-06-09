@@ -15,12 +15,24 @@ const getHospitales = async(req, res) => {
 }
 
 const addHospital = async(req, res) => {
-    const hospitales = await Hospital.find({});
+    const uid = req.uid;
 
-    res.json({
-        ok: true,
-        hospitales: hospitales,
+    const hospital = new Hospital({
+        usuario: uid,
+        ...req.body
     });
+
+    try {
+        const hospitalDB = await hospital.save();
+
+        res.json({
+            ok: true,
+            hospital: hospitalDB
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
+    }
 }
 
 const updateHospital = async(req, res) => {
