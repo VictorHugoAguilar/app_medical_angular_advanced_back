@@ -8,9 +8,8 @@ const { getHospitales, addHospital, updateHospital, deleteHospital } = require('
 
 const router = Router();
 /**
- * /api/hospitales
+ * Rutas: /api/hospitales
  */
-
 router.get('/', [], getHospitales);
 router.post('/', [], addHospital);
 router.put('/:id', [], updateHospital);

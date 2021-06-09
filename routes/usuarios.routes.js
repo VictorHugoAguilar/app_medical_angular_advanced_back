@@ -6,11 +6,9 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
-
 /**
  * RUTA: /api/usuarios
  */
-
 router.get('/', [
     validarJWT
 ], getUsers);
