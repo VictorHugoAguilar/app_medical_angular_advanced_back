@@ -1,13 +1,15 @@
 const { response } = require('express');
 const bcrypt = require('bcrypt');
 const Usuario = require('../models/usuario.model');
+const { generateJWT } = require('../helpers/jwt');
 
 const getUsers = async(req, res) => {
     const usuarios = await Usuario.find({}, 'nombre email role google');
 
     res.json({
         ok: true,
-        usuarios: usuarios
+        usuarios: usuarios,
+        uid: req.uid
     });
 }
 
@@ -29,10 +31,14 @@ const addUser = async(req, res = response) => {
 
         await usuario.save();
 
+        const token = await generateJWT(usuario.id);
+
         res.json({
             ok: true,
-            usuario
+            usuario,
+            token
         });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ ok: false, msg: 'Error inesperado en la carga de usuario' });
