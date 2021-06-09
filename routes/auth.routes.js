@@ -4,11 +4,11 @@ const { validarCampos } = require('../middlewares/validar-campos');
 
 const { login } = require('../controllers/auth.controller');
 
+const router = Router();
+
 /**
  * Rutas: /api/login
  */
-const router = Router();
-
 
 router.post('/', [
     check('email', 'El email es obligatorio').isEmail(),
