@@ -11,7 +11,11 @@ const router = Router();
  * Rutas: /api/medicos
  */
 router.get('/', [], getMedicos);
-router.post('/', [], addMedico);
+router.post('/', [
+    validarJWT,
+    check('nombre', 'El nombre del medico es necesario').not().isEmpty(),
+    validarCampos
+], addMedico);
 router.put('/:id', [], updateMedico);
 router.delete('/:id', [], deleteMedico)
 

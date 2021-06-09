@@ -13,12 +13,23 @@ const getMedicos = async(req, res) => {
 }
 
 const addMedico = async(req, res) => {
-    const medicos = await Medico.find({});
+    const uid = req.uid;
 
-    res.json({
-        ok: true,
-        medicos: medicos,
+    const medico = new Medico({
+        usuario: uid,
+        ...req.body
     });
+
+    try {
+        const medicoDB = await medico.save();
+        res.json({
+            ok: true,
+            medico: medicoDB
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
+    }
 }
 
 const updateMedico = async(req, res) => {

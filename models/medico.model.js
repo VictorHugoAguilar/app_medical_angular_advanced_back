@@ -9,13 +9,14 @@ const MedicoSchema = Schema({
         type: String,
     },
     usuario: {
+        require: true,
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
     }
 }, { collection: 'medicos' });
 
 MedicoSchema.method('toJSON', function() {
-    const { __v, ...object } = this.toObject();
+    const { __v, _id, ...object } = this.toObject();
     object.uid = _id;
     return object;
 });
