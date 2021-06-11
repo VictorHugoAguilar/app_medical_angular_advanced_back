@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const Hospital = require('../models/hospital.model');
 const { generateJWT } = require('../helpers/jwt');
 
-
-
 const getHospitales = async(req, res) => {
     const hospitales = await Hospital.find({})
         .populate('usuario', 'nombre img');
