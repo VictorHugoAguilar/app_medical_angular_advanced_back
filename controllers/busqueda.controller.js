@@ -33,10 +33,13 @@ const searchSpecific = async(req, res) => {
             data = await Usuario.find({ nombre: regex });
             break;
         case 'hospitales':
-            data = await Hospital.find({ nombre: regex });
+            data = await Hospital.find({ nombre: regex })
+                .populate('usuarios', 'nombre img');
             break;
         case 'medicos':
-            data = await Medico.find({ nombre: regex });
+            data = await Medico.find({ nombre: regex })
+                .populate('usuarios', 'nombre img')
+                .populate('hospital', 'nombre img');
             break;
         default:
             return res.status(400).json({
