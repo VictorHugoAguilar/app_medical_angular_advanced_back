@@ -8,11 +8,11 @@ const getUsers = async(req, res) => {
     const perPage = Number(req.query.perPage) || 0;
 
     const [usuarios, total] = await Promise.all([
-        Usuario.find({}, 'nombre email role google')
+        Usuario.find({}, 'nombre email role google img')
         .skip(desde)
         .limit(perPage),
-        Usuario.find().count()
-    ])
+        Usuario.countDocuments()
+    ]);
 
     res.json({
         ok: true,

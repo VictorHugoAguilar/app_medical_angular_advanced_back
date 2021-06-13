@@ -4,7 +4,7 @@ const Medico = require('../models/medico.model');
 const Usuario = require('../models/usuario.model');
 const Hospital = require('../models/hospital.model');
 
-const search = async(req, res) => {
+const search = async(req, res = response) => {
     const busqueda = req.params.busqueda;
     const regex = new RegExp(busqueda, 'i');
 
@@ -22,7 +22,7 @@ const search = async(req, res) => {
     });
 }
 
-const searchSpecific = async(req, res) => {
+const searchSpecific = async(req, res = response) => {
     const tabla = req.params.tabla;
     const busqueda = req.params.busqueda;
     const regex = new RegExp(busqueda, 'i');

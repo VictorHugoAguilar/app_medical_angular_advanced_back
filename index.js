@@ -23,6 +23,7 @@ app.use('/api/login', require('./routes/auth.routes'));
 app.use('/api/hospitales', require('./routes/hostpitales.routes'))
 app.use('/api/medicos', require('./routes/medicos.routes'))
 app.use('/api/busqueda', require('./routes/busqueda.routes'))
+app.use('/api/upload', require('./routes/upload.routes'))
 
 
 app.listen(process.env.PORT, () => {
