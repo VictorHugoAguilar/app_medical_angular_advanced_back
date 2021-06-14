@@ -2,10 +2,15 @@ const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+
 const { updateImage } = require('../helpers/updateImage');
 
-
-
+/**
+ * fileUpload
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const fileUpload = async(req, res = response) => {
     const tipo = req.params.tipo;
     const id = req.params.id;
@@ -25,12 +30,10 @@ const fileUpload = async(req, res = response) => {
             msg: 'No hay existe un fichero correcto'
         });
     }
-
     // procesar el fichero 
     const file = req.files.imagen;
     const nameSplit = file.name.split('.');
     const extensionFile = nameSplit[nameSplit.length - 1];
-
     // Validar la extension
     const extensionesValidas = ['png', 'jpg', 'svg', 'jpeg', 'gif'];
     if (!extensionesValidas.includes(extensionFile)) {
@@ -39,10 +42,8 @@ const fileUpload = async(req, res = response) => {
             msg: `La extensión del fichero ${extensionFile} no es válido`
         });
     }
-
     const nombreFichero = `${uuidv4()}.${extensionFile}`
     const uploadPath = `./uploads/${tipo}/${nombreFichero}`;
-
     // Use the mv() method to place the file somewhere on your server
     file.mv(uploadPath, (err) => {
         if (err)
@@ -54,14 +55,18 @@ const fileUpload = async(req, res = response) => {
         // Actualiar BD para el tipo propio
         updateImage(tipo, id, nombreFichero)
 
-        res.status(200).json({
+        return res.status(200).json({
             ok: true,
             msg: 'Fichero subido',
             nombreFichero
         });
     });
-}
-
+};
+/**
+ * downloadImg
+ * @param {*} req 
+ * @param {*} res 
+ */
 const downloadImg = (req, res = response) => {
     const tipo = req.params.tipo;
     const img = req.params.img;
@@ -71,8 +76,7 @@ const downloadImg = (req, res = response) => {
         pathImg = path.join(__dirname, `../uploads/default/no-img.jpg`);
     }
     res.sendFile(pathImg);
-}
-
+};
 
 module.exports = {
     fileUpload,

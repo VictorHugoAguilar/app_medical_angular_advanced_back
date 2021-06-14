@@ -1,9 +1,15 @@
 const { OAuth2Client } = require('google-auth-library');
+
 const client = new OAuth2Client({
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.SECRET_CLIENT
 });
 
+/**
+ * googleVerify
+ * @param {*} token 
+ * @returns 
+ */
 const googleVerify = async(token) => {
     try {
         const ticket = await client.verifyIdToken({
@@ -17,7 +23,7 @@ const googleVerify = async(token) => {
     } catch (error) {
         console.error(error)
     }
-}
+};
 
 module.exports = {
     googleVerify

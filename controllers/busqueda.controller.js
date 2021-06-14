@@ -4,29 +4,37 @@ const Medico = require('../models/medico.model');
 const Usuario = require('../models/usuario.model');
 const Hospital = require('../models/hospital.model');
 
+/**
+ * search
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const search = async(req, res = response) => {
     const busqueda = req.params.busqueda;
     const regex = new RegExp(busqueda, 'i');
-
     const [usuarios, medicos, hospitales] = await Promise.all([
         Usuario.find({ nombre: regex }),
         Medico.find({ nombre: regex }),
         Hospital.find({ nombre: regex })
     ]);
-
-    res.json({
+    return res.json({
         ok: true,
         usuarios,
         medicos,
         hospitales
     });
-}
-
+};
+/**
+ * searchSpecific
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const searchSpecific = async(req, res = response) => {
     const tabla = req.params.tabla;
     const busqueda = req.params.busqueda;
     const regex = new RegExp(busqueda, 'i');
-
     let data = [];
     switch (tabla) {
         case 'usuarios':
@@ -48,12 +56,11 @@ const searchSpecific = async(req, res = response) => {
             });
             break;
     }
-
-    res.json({
+    return res.json({
         ok: true,
         resultado: data
     });
-}
+};
 
 module.exports = {
     search,
