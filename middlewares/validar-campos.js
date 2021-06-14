@@ -1,7 +1,14 @@
 const { response } = require('express');
 const { validationResult } = require('express-validator');
 
-const validarCampos = (req, res, next) => {
+/**
+ * validarCampos
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+const validarCampos = (req, res = response, next) => {
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
         return res.status(400).json({
@@ -10,6 +17,6 @@ const validarCampos = (req, res, next) => {
         });
     }
     next();
-}
+};
 
 module.exports = { validarCampos }

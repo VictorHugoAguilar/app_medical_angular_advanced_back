@@ -1,8 +1,14 @@
 const { response } = require('express');
 const bcrypt = require('bcrypt');
-const Hospital = require('../models/hospital.model');
 const { generateJWT } = require('../helpers/jwt');
 
+const Hospital = require('../models/hospital.model');
+
+/**
+ * getHospitales
+ * @param {*} req 
+ * @param {*} res 
+ */
 const getHospitales = async(req, res) => {
     const hospitales = await Hospital.find({})
         .populate('usuario', 'nombre img');
@@ -11,8 +17,13 @@ const getHospitales = async(req, res) => {
         ok: true,
         hospitales: hospitales,
     });
-}
-
+};
+/**
+ * addHospital
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const addHospital = async(req, res) => {
     const uid = req.uid;
 
@@ -30,17 +41,22 @@ const addHospital = async(req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
+        return return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
     }
-}
-
+};
+/**
+ * updateHospital
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const updateHospital = async(req, res) => {
     const uid = req.params.id;
     const idUsuario = req.uid;
     try {
         const hospital = await Hospital.findById(uid);
         if (!hospital) {
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 msg: 'Hospital no encontrado'
             });
@@ -55,19 +71,24 @@ const updateHospital = async(req, res) => {
             hospital: hostipalUpdate,
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             ok: false,
             msg: 'Ha ocurrido un fallo'
         });
     }
-}
-
+};
+/**
+ * deleteHospital
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const deleteHospital = async(req, res) => {
     const uid = req.params.id;
     try {
         const hospital = await Hospital.findById(uid);
         if (!hospital) {
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 msg: 'Hospital no encontrado'
             });
@@ -79,12 +100,12 @@ const deleteHospital = async(req, res) => {
             hospital: hostipalDelete,
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             ok: false,
             msg: 'Ha ocurrido un fallo'
         });
     }
-}
+};
 
 module.exports = {
     getHospitales,

@@ -4,8 +4,14 @@ const Medico = require('../models/medico.model');
 const Usuario = require('../models/usuario.model');
 const Hospital = require('../models/hospital.model');
 
+/**
+ * updateImage
+ * @param {*} tipo 
+ * @param {*} id 
+ * @param {*} nombreFichero 
+ * @returns 
+ */
 const updateImage = async(tipo, id, nombreFichero) => {
-
     let data = [];
     switch (tipo) {
         case 'usuarios':
@@ -50,18 +56,18 @@ const updateImage = async(tipo, id, nombreFichero) => {
                 msg: 'La tabla de busquedas tienen que existir'
             });
     }
-
-}
-
+};
+/**
+ * checkOldFile
+ * @param {*} tipo 
+ * @param {*} nombreFichero 
+ */
 const checkOldFile = (tipo, nombreFichero) => {
     const pathOld = `./uploads/${tipo}/${nombreFichero}`;
     if (fs.existsSync(pathOld)) {
         // Elimina la imagen anterior;
         fs.unlinkSync(pathOld);
     }
-}
-
-
-
+};
 
 module.exports = { updateImage };

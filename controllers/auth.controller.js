@@ -6,8 +6,13 @@ const { googleVerify } = require('../helpers/google-verify');
 
 const Usuario = require('../models/usuario.model');
 
+/**
+ * login
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const login = async(req, res = response) => {
-
     const { email, password } = req.body;
     // Controlamos los fallos
     try {
@@ -31,8 +36,13 @@ const login = async(req, res = response) => {
     } catch (error) {
         console.error(error);
     }
-}
-
+};
+/**
+ * googleSignIn
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const googleSignIn = async(req, res = response) => {
     const googleToken = req.body.token;
     // Controlamos los fallos
@@ -71,8 +81,13 @@ const googleSignIn = async(req, res = response) => {
             error
         })
     }
-}
-
+};
+/**
+ * refreshToken
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const refreshToken = async(req, res = response) => {
     const uid = req.uid;
     // Generar el token
@@ -83,6 +98,6 @@ const refreshToken = async(req, res = response) => {
         token,
         uid
     });
-}
+};
 
 module.exports = { login, googleSignIn, refreshToken }
