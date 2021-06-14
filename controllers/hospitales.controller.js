@@ -41,7 +41,7 @@ const addHospital = async(req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
+        return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
     }
 };
 /**
