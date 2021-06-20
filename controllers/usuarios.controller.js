@@ -38,7 +38,7 @@ const addUser = async(req, res = response) => {
     try {
         const existeEmail = await Usuario.findOne({ email });
         if (existeEmail) {
-            return res.status(400).json({ ok: false, msn: 'El usuario ya existe' });
+            return res.status(400).json({ ok: false, msg: 'El usuario ya existe' });
         }
         const usuario = new Usuario(req.body);
         // encriptar contraseña
@@ -67,7 +67,7 @@ const updateUser = async(req, res = response) => {
     try {
         const existeUsuario = await Usuario.findById(uid);
         if (!existeUsuario) {
-            return res.status(400).json({ ok: false, msn: 'El usuario no existe con ese usuario' });
+            return res.status(400).json({ ok: false, msg: 'El usuario no existe con ese usuario' });
         }
         // Validar token y si es el usuario correcto
         const { password, google, email, ...campos } = req.body;
@@ -75,7 +75,7 @@ const updateUser = async(req, res = response) => {
             // Validar si existe algun usuario con ese email
             const existeEmail = await Usuario.findOne({ email });
             if (existeEmail) {
-                return res.status(400).json({ ok: false, msn: 'El usuario ya existe' });
+                return res.status(400).json({ ok: false, msg: 'El usuario ya existe' });
             }
         }
         campos.email = email;
