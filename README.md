@@ -1,4 +1,4 @@
-# Back-End Aplicacion de gestion medica
+# Back-End de Aplicación de gestion medica
 
 Un back-end con CRUD para gestion de medico, hospitales. Login contra la misma aplicación, o contra google sign.
 Gestion de imagenes, para subir o descargarlas.
