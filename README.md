@@ -12,6 +12,17 @@ Para correr la aplicacion son necesarios los siguientes pasos:
   sudo mongod --dbpath /Users/*******/data/mongo-data/
 ````
 
+- Configurar las variables de entorno
+
+ejemplo: 
+
+`````
+DB_CNN='mongodb://localhost:27017/medical'
+PORT='3000'
+JWT_SECRET='secret'
+````
+
+
 - Levantar el servidor de node con express en desarrollo
 
 ````
