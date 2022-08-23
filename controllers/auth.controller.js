@@ -92,10 +92,22 @@ const refreshToken = async(req, res = response) => {
     const uid = req.uid;
     // Generar el token
     const token = await generateJWT(uid);
+    
+    // Obtener el usuario por UID
+    const usuario = await Usuario.findById(uid);
+
+    if(!usuario){
+        return res.status(500).json({
+            ok: false,
+            msn: 'Not found user'
+        })
+    }
+
     // enviar la respuesta
     return res.status(200).json({
         ok: true,
         token,
+        usuario,
         uid
     });
 };

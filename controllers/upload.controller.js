@@ -11,7 +11,7 @@ const { updateImage } = require('../helpers/updateImage');
  * @param {*} res 
  * @returns 
  */
-const fileUpload = async(req, res = response) => {
+const fileUpload = async (req, res = response) => {
     const tipo = req.params.tipo;
     const id = req.params.id;
     const regex = new RegExp(id, 'i');
@@ -31,7 +31,7 @@ const fileUpload = async(req, res = response) => {
         });
     }
     // procesar el fichero 
-    const file = req.files.imagen;
+    const file = req.files.image;
     const nameSplit = file.name.split('.');
     const extensionFile = nameSplit[nameSplit.length - 1];
     // Validar la extension
@@ -46,11 +46,12 @@ const fileUpload = async(req, res = response) => {
     const uploadPath = `./uploads/${tipo}/${nombreFichero}`;
     // Use the mv() method to place the file somewhere on your server
     file.mv(uploadPath, (err) => {
-        if (err)
+        if (err) {
             return res.status(500).json({
                 ok: false,
                 msn: 'Fallo al subir el fichero al servido'
             });
+        }
 
         // Actualiar BD para el tipo propio
         updateImage(tipo, id, nombreFichero)

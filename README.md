@@ -30,3 +30,21 @@ JWT_SECRET='secret'
 ````
 
 
+- En entorno desarrollo podemos levantar una bd mongo en un docker
+
+Hacer un pull de un docker de mongo
+
+`````
+docker run -d -p 27017:27017 --name=medical mongo:4.2
+``````
+
+En la página podemos ver que el nombre de la imagen es mongo (gracias capitán obvio), entonces vamos a instalar usando el comando run de docker. En una terminal ejecuta lo lo siguiente:
+
+`````
+docker run -d -p 27017:27017 --name medical mongo:4.2
+`````
+
+
+
+
+
