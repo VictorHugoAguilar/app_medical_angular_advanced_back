@@ -11,13 +11,13 @@ const Usuario = require('../models/usuario.model');
  * @param {*} res 
  * @returns 
  */
-const getUsers = async(req, res) => {
+const getUsers = async (req, res) => {
     const desde = Number(req.query.desde) || 0;
     const perPage = Number(req.query.perPage) || 0;
     const [usuarios, total] = await Promise.all([
         Usuario.find({}, 'nombre email role google img')
-        .skip(desde)
-        .limit(perPage),
+            .skip(desde)
+            .limit(perPage),
         Usuario.countDocuments()
     ]);
     return res.json({
@@ -33,7 +33,7 @@ const getUsers = async(req, res) => {
  * @param {*} res 
  * @returns 
  */
-const addUser = async(req, res = response) => {
+const addUser = async (req, res = response) => {
     const { email, nombre, password } = req.body;
     try {
         const existeEmail = await Usuario.findOne({ email });
@@ -62,7 +62,7 @@ const addUser = async(req, res = response) => {
  * @param {*} res 
  * @returns 
  */
-const updateUser = async(req, res = response) => {
+const updateUser = async (req, res = response) => {
     const uid = req.params.id;
     try {
         const existeUsuario = await Usuario.findById(uid);
@@ -78,7 +78,14 @@ const updateUser = async(req, res = response) => {
                 return res.status(400).json({ ok: false, msg: 'El usuario ya existe' });
             }
         }
-        campos.email = email;
+        if (!existeUsuario.google) {
+            campos.email = email;
+        } else if (existeUsuario.email !== email) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'el usuario de google no puede cambiar su correo'
+            })
+        }
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, { new: true });
         return res.json({
             ok: true,
@@ -95,7 +102,7 @@ const updateUser = async(req, res = response) => {
  * @param {*} res 
  * @returns 
  */
-const deleteUser = async(req, res = response) => {
+const deleteUser = async (req, res = response) => {
     const uid = req.params.id;
     try {
         const existeUsuario = await Usuario.findById(uid);
