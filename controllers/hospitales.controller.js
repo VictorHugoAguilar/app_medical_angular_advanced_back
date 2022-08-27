@@ -40,7 +40,7 @@ const addHospital = async(req, res) => {
             hospital: hospitalDB
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
     }
 };

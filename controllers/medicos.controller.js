@@ -38,7 +38,7 @@ const addMedico = async(req, res) => {
             medico: medicoDB
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return res.status(500).json({ ok: false, msn: 'Ha surgido un fallo' });
     }
 };
@@ -63,7 +63,6 @@ const updateMedico = async(req, res) => {
             ...req.body,
             usuario: idUsuario
         }
-        console.log(medicoUpd)
         const medicolUpdate = await Medico.findByIdAndUpdate(uid, medicoUpd, { new: true });
         return res.json({
             ok: true,

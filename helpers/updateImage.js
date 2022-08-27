@@ -17,7 +17,7 @@ const updateImage = async(tipo, id, nombreFichero) => {
         case 'usuarios':
             const usuario = await Usuario.findById(id);
             if (!usuario) {
-                console.log('No existe médico con ese ID');
+                console.error('No existe médico con ese ID');
                 return false;
             }
             // Verificamos si existe un fichero ya almacenado si es así lo eliminamos
@@ -29,7 +29,7 @@ const updateImage = async(tipo, id, nombreFichero) => {
         case 'hospitales':
             const hospital = await Hospital.findById(id);
             if (!hospital) {
-                console.log('No existe hospital con ese ID');
+                console.error('No existe hospital con ese ID');
                 return false;
             }
             // Verificamos si existe un fichero ya almacenado si es así lo eliminamos
@@ -41,7 +41,7 @@ const updateImage = async(tipo, id, nombreFichero) => {
         case 'medicos':
             const medico = await Medico.findById(id);
             if (!medico) {
-                console.log('No existe médico con ese ID');
+                console.error('No existe médico con ese ID');
                 return false;
             }
             // Verificamos si existe un fichero ya almacenado si es así lo eliminamos

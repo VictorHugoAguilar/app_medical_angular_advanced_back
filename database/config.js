@@ -7,7 +7,7 @@ const dbConnection = async() => {
             useUnifiedTopology: true,
             useCreateIndex: true
         });
-        console.log('DB online');
+        console.info('DB online');
     } catch (error) {
         throw new Error('No se ha podido levantar el servidor de BD');
     }
