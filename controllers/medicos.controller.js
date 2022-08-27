@@ -63,10 +63,11 @@ const updateMedico = async(req, res) => {
             ...req.body,
             usuario: idUsuario
         }
+        console.log(medicoUpd)
         const medicolUpdate = await Medico.findByIdAndUpdate(uid, medicoUpd, { new: true });
         return res.json({
             ok: true,
-            hospital: medicolUpdate,
+            medico: medicolUpdate,
         });
     } catch (error) {
         return res.status(500).json({
@@ -107,9 +108,43 @@ const deleteMedico = async(req, res) => {
     }
 };
 
+/**
+ * Get Medico by id
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+const getMedico = async(req, res) => {
+    const uid = req.params.id;
+    try {
+        const medico = await Medico.findById(uid)
+            .populate('usuario', 'nombre img')
+            .populate('hospital', 'nombre img');
+
+        if (!medico) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Médico no encontrado'
+            });
+        }
+        return res.json({
+            ok: true,
+            medico: medico,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: 'Ha ocurrido un fallo',
+            error
+        });
+    }
+};
+
+
 module.exports = {
     getMedicos,
     addMedico,
     updateMedico,
-    deleteMedico
+    deleteMedico,
+    getMedico
 }
