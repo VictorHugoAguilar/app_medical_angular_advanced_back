@@ -44,7 +44,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.env
 /uploads/hospitales
 /uploads/medicos
 /uploads/usuarios
