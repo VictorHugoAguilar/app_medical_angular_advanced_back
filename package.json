@@ -1,7 +1,7 @@
 {
     "name": "admin-pro-back",
     "version": "1.0.2",
-    "description": "Back-end app for app medical",
+    "description": "Back-End app for app medical",
     "main": "index.js",
     "scripts": {
         "start:dev": "nodemon index.js",
