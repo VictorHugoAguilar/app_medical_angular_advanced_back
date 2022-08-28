@@ -1,14 +1,14 @@
 {
     "name": "admin-pro-back",
     "version": "1.0.2",
-    "description": "",
+    "description": "Back-end app for app medical",
     "main": "index.js",
     "scripts": {
         "start:dev": "nodemon index.js",
         "start": "node index.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Victor Hugo Aguilar",
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.0.1",

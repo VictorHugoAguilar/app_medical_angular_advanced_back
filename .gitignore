@@ -45,6 +45,7 @@ testem.log
 Thumbs.db
 
 .env
-/uploads/hospitales
-/uploads/medicos
-/uploads/usuarios
+
+/uploads/hospitales/*.jpg
+/uploads/medicos/*.jpg
+/uploads/usuarios/*.jpg
