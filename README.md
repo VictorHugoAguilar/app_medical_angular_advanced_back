@@ -44,6 +44,12 @@ En la página podemos ver que el nombre de la imagen es mongo (gracias capitán 
 docker run -d -p 27017:27017 --name medical mongo:4.2
 `````
 
+HEROKU
+
+for push in remote heroku and deploy
+`````
+ git push heroku main
+````
 
 
 
